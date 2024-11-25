@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!--Fila-->
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna Izquierda-->
+        <h1>Mom</h1>
+
+        <div class="card"> <!--Tarjeta-->
+            <div class="card-body">
+                <form action="/registrarEmpleados/" method="POST"> {% csrf_token %} <!--Formulario-->
+                    <div class="form-group">
+                        <input type="text" id="txtidEmpleado" name="txtidEmpleado" class="form-control" 
+                        placeholder="Id Empleados" minLenght="6" maxLenght="6" reqired>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" 
+                        placeholder="Nombre Empleados" maxLenght="100" reqired>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtFech_nac" name="txtFech_nac" class="form-control" 
+                        placeholder="Fecha de nacimiento" value="" min="1" max="9" reqired>
+                    </div>
+                    <div class="form-group py-4">
+                        <input type="text" id="txtSexo" name="txtSexo" class="form-control" 
+                        placeholder="Sexo" maxLenght="100" reqired>
+                    </div>
+                    <div class="form-group py-5">
+                        <input type="text" id="txtEmail" name="txtEmail" class="form-control" 
+                        placeholder="Email" maxLenght="100" reqired>
+                    </div>
+                    <div class="form-group py-6">
+                        <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" 
+                        placeholder="Numero de telefono" maxLenght="100" reqired>
+                    </div>
+                    <div class="form-group py-7">
+                        <input type="text" id="txtPuesto" name="txtPuesto" class="form-control" 
+                        placeholder="Puesto" maxLenght="100" reqired>
+                    </div>
+                    <div class="form-group py-8">
+                        <button type="submit" class="btn btn-secondary">Guardar</button>
+                    </div>
+                </form> <!--Formulario-->
+            </div>
+        </div> <!--Tarjeta-->
+
+    </div><!--Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-4"> <!--Columna Derecha-->
+        <h1>Listado de Empleados</h1>
+        <img class="w-50"scr="{% static "img/empleado.png" %}" alt="imagen" width="400" height="200"></img>
+
+        <div class="table-responsive"> <!--Tabla Responsive-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">idEmpleado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha_nacimiento</th>
+                    <th colspan="3">Sexo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Numero_telefono</th>
+                    <th scope="col">Puesto</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for m in losempleados1 %}
+                    <tr>
+                        <td> {{forloop.counter}} </td>
+                        <td> {{m.idEmpleado}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.Fecha_nac}} </td>
+                        <td> {{m.sexo}} </td>
+                        <td> {{m.email}} </td>
+                        <td> {{m.no_telefono}} </td>
+                        <td> {{m.puesto}} </td>
+                        <td> <a href="seleccionarEmpleados/{{m.idEmpleado}}" class="btn btn-info">Editar</a></td>
+                        <td> <a href="borrarEmpleados/{{m.idEmpleado}}" class="btn btn-danger">Borrar</a></td>
+                    </tr>    
+                    {% endfor %}                
+
+                </tbody>
+            </table>
+
+        <div><!--Tabla Responsive-->
+    </div><!--Columna Derecha-->
+    
+</div> <!--Fila-->
+
+{% endblock %}
